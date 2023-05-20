@@ -7,7 +7,12 @@ async function run() {
         //launches a browser instance to pull its web socket endpoint for later use
         const browser = await puppeteer.launch({
             executablePath:'C:\\Users\\Henderson Bare\\Desktop\\VSCODE\\NodeAndScraping\\node_modules\\@puppeteer\\browsers\\chrome\\win64-115.0.5777.0\\chrome-win64\\chrome.exe',
-            channel: "chrome"
+            channel: "chrome",
+            args: [
+                '--proxy-server=190.61.88.147:3128',
+                '--ignore-certificate-errors',
+                '--ignore-certificate-errors-spki-list '
+            ]
         });
         const UserWSEndpoint = browser.wsEndpoint();
         //await UserBrowser.close();
@@ -33,7 +38,6 @@ async function run() {
 
     } catch (e) {
         console.error('scrape failed', e);
-        if (!browser.UserWSEndpoint == null) {browser.close();}
     }
     finally {
         await browser?.close();
